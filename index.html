@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date-Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        .body-container {
+            font-family: "Poetsen One", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+          }
+        body{
+            text-align: center;
+            font-size: 50px;
+            background-color: #00DBDE;
+            background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+
+        }
+        .card{
+            background-color: rgb(231, 245, 233);
+            width: 80%;
+            margin: 10%;
+            padding-top: 25px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 5px black;
+        }
+        .date-box{
+            height: 20px;
+            border-radius: 5px;
+            padding: 5px;
+            border: 0.5px solid black;
+            margin: 10px;
+        }
+        .card-buttonn{
+            height: 35px;
+            width: 180px;
+            background-color: #00DBDE;
+            background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+            color: white;
+            font-weight: 800;
+            border-radius: 15px;
+            cursor: pointer;
+            border: none;
+            margin-top: 40px;
+        }
+        .result{
+            color: black;
+            font-weight: 800;
+            padding-top: 40px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .card{
+                height: 80%;
+                width: 80%;
+                font-size:40px;
+            }
+            .card-buttonn{
+                height: 25px;
+                width: 130px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="body-container">
+    <div class="card">
+        <label for="date">Enter Two dates to calculate difference :</label>
+        <br>
+        <input type="date" id="1date" class="date-box">
+        <input type="date" id="2date" class="date-box">
+        <br>
+        <button onclick="calculate()" class="card-buttonn">Calculate</button>
+        <button type="button" class="card-buttonn" onclick="reset()">Reset</button>
+        <p id="result" class="result">
+        </p>
+    </div>
+   
+    <script>
+        function calculate(){
+            const date1_input = document.getElementById('1date').value;
+            const date1 = new Date(date1_input);
+            const date2_input = document.getElementById('2date').value;
+            const date2 = new Date(date2_input);
+            let firstDate= null;
+            let secondDate=null;
+            let yearDiff =null;
+            let monthDiff = null;
+            let dateDiff=null;
+            if(date1 > date2)
+            {
+                firstDate= date2;
+                secondDate= new Date(date1.getFullYear(),date1.getMonth(),date1.getDate()-1,);
+                yearDiff = secondDate.getFullYear() - firstDate.getFullYear();
+                monthDiff = secondDate.getMonth() - firstDate.getMonth();
+                dateDiff = secondDate.getDate() - firstDate.getDate();
+                
+            }
+            else if(date1 < date2)
+            {
+                firstDate= date1;
+                secondDate= new Date(date2.getFullYear(),date2.getMonth(),date2.getDate()-1,);
+                yearDiff = secondDate.getFullYear() - firstDate.getFullYear();
+                monthDiff = secondDate.getMonth() - firstDate.getMonth();
+                dateDiff = secondDate.getDate() - firstDate.getDate();
+            }
+            document.getElementById('result').innerText = `${yearDiff} Years : ${monthDiff} Months : ${dateDiff} Days `; 
+          
+        }
+        function reset(){
+            const input1 = document.getElementById("1date");
+            const input2 = document.getElementById("2date");
+            const result = document.getElementById("result");
+            input1.value = "";
+            input2.value = "";
+            result.innerText = "";
+        }
+        
+       </script>
+</body>
+</html>
